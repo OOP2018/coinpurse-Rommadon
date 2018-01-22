@@ -10,8 +10,11 @@ package coinpurse;
  *  
  *  @author your name
  */
-public class Coin {
-    /** Collection of objects in the purse. */
+public class Coin implements Comparable<Coin>{
+    private double value;
+	private String currency;
+
+	/** Collection of objects in the purse. */
     //TODO declare a List of Coins named "money".
     
     /** Capacity is maximum number of items the purse can hold.
@@ -23,7 +26,9 @@ public class Coin {
      *  @param capacity is maximum number of coins you can put in purse.
      */
 	Coin(double value,String currency){
-
+		this.value = value;
+		this.currency = currency;
+		
     }
 
     /**
