@@ -36,7 +36,7 @@ public class Coin implements Comparable<Coin>{
      * This is the number of coins, not their value.
      * @return the number of coins in the purse
      */
-    public double getValue( ){ return 0; }
+    public double getValue( ){ return value; }
     
     /** 
      *  Get the total value of all items in the purse.
