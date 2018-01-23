@@ -11,7 +11,7 @@ import java.util.Collections;
  *  You can insert coins, withdraw money, check the balance,
  *  and check if the purse is full.
  *  
- *  @author your name
+ *  @author Rommadon Teedo 5810545025
  */
 public class Purse {
     /** Collection of objects in the purse. */
@@ -151,7 +151,7 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-       return "purse have" + this.count() + "with balance" + this.getBalance();
+       return "purse have " + this.count() + " coin with balance " + this.getBalance();
     }
 
 }
