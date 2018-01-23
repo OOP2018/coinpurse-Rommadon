@@ -2,8 +2,17 @@ package coinpurse;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class for sort the coins by the value.
+ *
+ */
 public class MoneyUtil {
+	/**
+	 * the coins sort
+	 * @param coins is the list of coin money in purse.
+	 * @param currency is the currency of the coin.
+	 * @return the list of coin .
+	 */
 	
 	public static void main(String[] arg)
 	{
@@ -20,6 +29,11 @@ public class MoneyUtil {
 		printCoins( coins );
 		
 	}
+	
+	/**
+	 * show coin in purse
+	 * @param List coin is all coin in purse
+	 */
 	
 	public static void printCoins(List<Coin> coins){
 		coins.forEach(System.out::println);
