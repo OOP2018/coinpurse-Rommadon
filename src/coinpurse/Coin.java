@@ -1,65 +1,57 @@
 package coinpurse;
  
-//TODO import List, ArrayList, and Collections
-// You will use Collections.sort() to sort the coins
+
 
 /**
- *  A coin purse contains coins.
- *  You can insert coins, withdraw money, check the balance,
- *  and check if the purse is full.
  *  
- *  @author your name
+ *  
+ *  @author Rommadon Teedo 5810545025
  */
 public class Coin implements Comparable<Coin>{
     private double value;
 	private String currency;
 
-	/** Collection of objects in the purse. */
-    //TODO declare a List of Coins named "money".
+	
     
-    /** Capacity is maximum number of items the purse can hold.
-     *  Capacity is set when the purse is created and cannot be changed.
-     */
-    
-    /** 
-     *  Create a purse with a specified capacity.
-     *  @param capacity is maximum number of coins you can put in purse.
-     */
 	Coin(double value,String currency){
 		this.value = value;
 		this.currency = currency;
 		
     }
 
-    /**
-     * Count and return the number of coins in the purse.
-     * This is the number of coins, not their value.
-     * @return the number of coins in the purse
-     */
+  
     public double getValue( ){ return value; }
+    public String getCurrency( ){ return currency; }
     
-    /** 
-     *  Get the total value of all items in the purse.
-     *  @return the total value of items in the purse.
-     */
+ 
     public boolean equals(Object arg) {
+    	if (arg == null) return false;
+		if (arg.getClass() != this.getClass() )
+			return false;
+		Coin other = (Coin) arg;
+		if ( currency.equalsIgnoreCase( other.currency ) && value==other.value )
+			return true;
 		return false; 
 	}
 
     
-    /**
-     * Return the capacity of the coin purse.
-     * @return the capacity
-     */
-    //TODO write accessor method for capacity. Use Java naming convention.
+   
     public int compareTo(Coin coin) { 
-		return 0; 
+    	if(coin.getValue()-this.getValue() <0)
+		{
+			return -1;
+		} else if(coin.getValue()-this.getValue() > 0){
+			return 1;
+		} else { 
+			return 0;
+		}
+		
 	}
 
     public String toString() {
-        //TODO complete this
-    	return "you forgot to write Purse.toString()";
+       
+    	return value + " " + currency;
     }
 
 }
-//TODO When you finish, there should not be any TODO comments, including this one!
+
