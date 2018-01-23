@@ -68,7 +68,7 @@ public class Purse {
      *  @return true if purse is full.
      */
     public boolean isFull() {
-       if(money.size()==capacity){
+       if(money.size()>=capacity){
     	   return true;
        }else{
     	   return false;
@@ -83,12 +83,15 @@ public class Purse {
      * @return true if coin inserted, false if can't insert
      */
     public boolean insert( Coin coin ) {
-        if(isFull()==false){
-        	return false;
-        }else{
-        	money.add(coin);
-        	return true;
-        }
+    	if (!isFull()) {
+			if (coin.getValue() <= 0) {
+				return false;
+			} else {
+				money.add(coin);
+				return true;
+			}
+		}
+		return false;
        
     }
     

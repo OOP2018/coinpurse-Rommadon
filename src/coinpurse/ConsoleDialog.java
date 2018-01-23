@@ -71,11 +71,10 @@ public class ConsoleDialog {
      * so check for that.
      */
     public void depositDialog() {
-    	// Check to see if user typed values on the same line as "d".
-    	// If so then use them without prompting for more.
+    	
     	String inline = console.nextLine().trim();
     	if (inline.isEmpty()) {
-    		System.out.print("Enter value of coin(s) to deposit on one line [eg: 5 0.5 1]: ");
+    		System.out.print("Enter value of coin(s) to deposit : ");
     		inline = console.nextLine();
     	}
         // parse input line into numbers
