@@ -1,6 +1,7 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 /**
  * This class for sort the coins by the value.
@@ -38,6 +39,30 @@ public class MoneyUtil {
 	public static void printCoins(List<Coin> coins){
 		coins.forEach(System.out::println);
 		
+	}
+	
+	/**
+	 * Find the coins are same currency and get the list.
+	 * @param coins are coins in list.
+	 * @param currency is currency of coins.
+	 * @return the list of coins that have same currency.
+	 */
+	public static List<Coin> filterByCurrency(List<Coin> coins, String currency) {
+		List<Coin> sameCurrency = new ArrayList<>();
+		for (Coin coin : coins) {
+			if (coin.getCurrency().equals(currency)) {
+				sameCurrency.add(coin);
+			}
+		}
+		return sameCurrency;
+	}
+	
+	/**
+	 * Sort coins 
+	 * @param coins are coins in list.
+	 */
+	public static void sortCoins(List<Coin> coins) {
+		Collections.sort(coins);
 	}
 
 }
