@@ -134,8 +134,7 @@ public class Purse {
 				money.remove(c);
 			}
 		}
-		else if ( amountNeededToWithdraw != 0 )
-		{	
+		else {	
 			return null;
 		}
 		Coin[] withcoin = new Coin[withdrawcoin.size()];
