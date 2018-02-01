@@ -15,7 +15,8 @@ import java.util.Collections;
  */
 public class Purse {
 	/** Collection of objects in the purse. */
-	List<Coin> money = new ArrayList<Coin>( );
+	private List<Valuable> money;
+
 
 	/** Capacity is maximum number of items the purse can hold.
 	 *  Capacity is set when the purse is created and cannot be changed.
@@ -28,6 +29,8 @@ public class Purse {
 	 */
 	public Purse( int capacity ) {
 		this.capacity=capacity;
+    	money = new ArrayList<Valuable>();
+
 
 	}
 
