@@ -4,7 +4,7 @@ package coinpurse;
  *  Coin represents value and currency.
  *  @author Rommadon Teedo 5810545025
  */
-public class Coin implements Comparable<Coin>{
+public class Coin implements Comparable<Coin>,Valuable{
     private double value;
 	private String currency;
 	
