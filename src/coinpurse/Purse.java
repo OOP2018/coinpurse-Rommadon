@@ -3,6 +3,7 @@ package coinpurse;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 
 
@@ -85,7 +86,7 @@ public class Purse {
 	 * @param coin is a Coin object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
-	public boolean insert( Coin coin ) {
+	 public boolean insert( Valuable coin ) {
 		if (!isFull()) {
 			if (coin.getValue() <= 0) {
 				return false;
@@ -106,44 +107,45 @@ public class Purse {
 	 *  @return array of Coin objects for money withdrawn, 
 	 *    or null if cannot withdraw requested amount.
 	 */
-	public Coin[] withdraw( double amount ) {
+	public Valuable[] withdraw( double amount ) {
 
-		List<Coin> withdrawcoin = new ArrayList<Coin>( ); 
 		double amountNeededToWithdraw = amount;
 
 		if(amount<=0) {
 			return null;
 		}
 
-		Collections.sort(this.money);
+		Comparator<Valuable> comp = new ValueComparator();
+    	List<Valuable> list = new ArrayList<>();
+    	Collections.sort(money, comp);
+    	Collections.reverse(money);
 
 		if(amountNeededToWithdraw!=0) {	
 			if(amountNeededToWithdraw <= this.getBalance())
 			{
-				for (Coin coin: this.money)
+				for (int i = 0; i < money.size(); i++)
 				{
-					if(amountNeededToWithdraw >= coin.getValue())
+					if(amountNeededToWithdraw >= money.get(i).getValue())
 					{
-						amountNeededToWithdraw -= coin.getValue();
-						withdrawcoin.add(coin);
-					}
+						amountNeededToWithdraw -= money.get(i).getValue();
+						list.add(money.get(i));					
+						}
 				}
 			}
 
 			if(amountNeededToWithdraw==0)
 			{
-				for(Coin c : withdrawcoin)
+				for(Valuable removeCoin : list)
 				{
-					money.remove(c);
+					money.remove(removeCoin);
 				}
 			} else {	
 				return null;
 			}
 
-			Coin[] withcoin = new Coin[withdrawcoin.size()];
-			withdrawcoin.toArray(withcoin);
+			Valuable[] withdraw = new Valuable[list.size()];
 
-			return withcoin;
+	        return list.toArray(withdraw);
 		}
 		return null;
 	}

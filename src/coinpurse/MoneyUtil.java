@@ -2,6 +2,7 @@ package coinpurse;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 /**
  * This class for sort the coins by the value.
@@ -17,18 +18,19 @@ public class MoneyUtil {
 	
 	public static void main(String[] arg)
 	{
-		List<Coin> coins = new ArrayList<Coin>( );
+		List<Valuable> m = new ArrayList<Valuable>();
 		
 		
-		coins.add( new Coin(10.0, "Baht") );
-		coins.add( new Coin(0.5, "Baht") );
-		coins.add( new Coin(2.0, "Baht") ); 
-		coins.add( new Coin(1.0, "Baht") );
+		m.add( new Coin(10.0, "Baht") );
+		m.add( new Coin(0.5, "Baht") );
+		m.add( new Coin(2.0, "Baht") ); 
+		m.add( new Coin(1.0, "Baht") );
+		sortCoins(m);
+		printCoins(m);
+		System.out.println(filterByCurrency(m, "Baht"));
+
 		
-		printCoins( coins ); 
-		java.util.Collections.sort( coins );
-		printCoins( coins );
-		
+	
 	}
 	
 	/**
@@ -36,7 +38,7 @@ public class MoneyUtil {
 	 * @param List coin is all coin in purse
 	 */
 	
-	public static void printCoins(List<Coin> coins){
+	public static void printCoins(List<Valuable> coins){
 		coins.forEach(System.out::println);
 		
 	}
@@ -47,22 +49,23 @@ public class MoneyUtil {
 	 * @param currency is currency of coins.
 	 * @return the list of coins that have same currency.
 	 */
-	public static List<Coin> filterByCurrency(List<Coin> coins, String currency) {
-		List<Coin> sameCurrency = new ArrayList<>();
-		for (Coin coin : coins) {
-			if (coin.getCurrency().equals(currency)) {
-				sameCurrency.add(coin);
+	
+	public static List<Valuable> filterByCurrency(List<Valuable> money, String currency){
+			 		List<Valuable> coinF = new ArrayList<>();
+			 		for(int i = 0; i < money.size(); i++){
+			 			if(money.get(i).getCurrency().equals(currency)){
+			 				coinF.add(money.get(i));
 			}
 		}
-		return sameCurrency;
+		return coinF;
 	}
 	
 	/**
 	 * Sort coins 
 	 * @param coins are coins in list.
 	 */
-	public static void sortCoins(List<Coin> coins) {
-		Collections.sort(coins);
-	}
-
+	public static void sortCoins(List<Valuable> coins){
+			Comparator<Valuable> comp = new ValueComparator();
+			java.util.Collections.sort(coins, comp);
+		  	}
 }

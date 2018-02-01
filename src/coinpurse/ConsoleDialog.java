@@ -78,17 +78,17 @@ public class ConsoleDialog {
     		inline = console.nextLine();
     	}
         // parse input line into numbers
-        Scanner scanline = new Scanner(inline);
-        while( scanline.hasNextDouble() ) {
-            double value = scanline.nextDouble();
-            Coin coin = makeMoney(value);
-            System.out.printf("Deposit %s... ", coin.toString() );
-            boolean ok = purse.insert(coin);
-            System.out.println( (ok? "ok" : "FAILED") );
-        }
-        if ( scanline.hasNext() )
-            System.out.println("Invalid input: "+scanline.next() );
-        scanline.close();
+    	 Scanner scanline = new Scanner(inline);
+         while( scanline.hasNextDouble() ) {
+             double value = scanline.nextDouble();
+             Valuable money = makeMoney(value);
+             System.out.printf("Deposit %s... ", money.toString() );
+             boolean ok = purse.insert(money);
+             System.out.println( (ok? "ok" : "FAILED") );
+         }
+         if ( scanline.hasNext() )
+             System.out.println("Invalid input: "+scanline.next() );
+         scanline.close();
     }
     
     /** Ask how much money (Baht) to withdraw and then do it.
@@ -107,13 +107,13 @@ public class ConsoleDialog {
         
         if ( scanline.hasNextDouble() ) {
              double amount = scanline.nextDouble( );
-             Coin [] coins = purse.withdraw(amount);
-             if ( coins == null ) 
+             Valuable[] money = purse.withdraw(amount);
+             if ( money == null ) 
                 System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
              else {
                 System.out.print("You withdrew:");
-                for(int k=0; k<coins.length; k++) {
-                	System.out.print((k==0?" ":", ") + coins[k].toString() );
+                for(int k=0; k<money.length; k++) {
+                	System.out.print((k==0?" ":", ") + money[k].toString() );
                 }
                 System.out.println();
             }
