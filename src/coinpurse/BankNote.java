@@ -2,7 +2,7 @@ package coinpurse;
 
 /**
  * 
- * Banknote represents value and currency.
+ * Banknote represents value and currency and serialnumber.
  * 
  * @author Rommadon Teedo 5810545025
  */
@@ -16,10 +16,9 @@ public class BankNote implements Valuable {
 	/**
 	 * Constructor for banknote with a value and currency
 	 * 
-	 * @param value
-	 *            of the coin
-	 * @param currency
-	 *            of the coin
+	 * @param value of the banknote
+	 * @param currency of the banknote
+	 * 
 	 */
 	public BankNote(double value, String currency) {
 		this.value = value;
@@ -54,9 +53,11 @@ public class BankNote implements Valuable {
 		return serialNumber;
 	}
 	
-	 /**
-		 * Two serialNumber are equal if they have same value and currency.
-		 */
+	/**
+	 * Checks object equal or not.
+	 * @param arg is the object compare 
+	 * @return true if equal false otherwise
+	 */
 
 	public boolean equals(Object obj) {
 		if (obj == null)
@@ -64,13 +65,14 @@ public class BankNote implements Valuable {
 		if (obj.getClass() != this.getClass())
 			return false;
 		BankNote other = (BankNote) obj;
-		return this.value == other.value && this.currency == other.currency;
+		return this.value == other.value && this.currency.equals(other.currency);
 	}
 
-	 /**
-		 * show value and currency
-		 * @return the sentence value and currency.
-		 */
+	/**
+	 * Returns a description of the banknote.
+	 * 
+	 * @return describe of the banknote
+	 */
 	public String toString() {
 		return String.format("%.0f-%s note[%d]", value, currency, serialNumber);
 	}

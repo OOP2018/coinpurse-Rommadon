@@ -8,8 +8,8 @@ import java.util.Comparator;
 
 
 /**
- *  A coin purse contains coins.
- *  You can insert coins, withdraw money, check the balance,
+ *  A valuable purse contains money.
+ *  You can insert money, withdraw money, check the balance,
  *  and check if the purse is full.
  *  
  *  @author Rommadon Teedo 5810545025
@@ -26,7 +26,7 @@ public class Purse {
 
 	/** 
 	 *  Create a purse with a specified capacity.
-	 *  @param capacity is maximum number of coins you can put in purse.
+	 *  @param capacity is maximum number of money you can put in purse.
 	 */
 	public Purse( int capacity ) {
 		this.capacity=capacity;
@@ -36,9 +36,9 @@ public class Purse {
 	}
 
 	/**
-	 * Count and return the number of coins in the purse.
-	 * This is the number of coins, not their value.
-	 * @return the number of coins in the purse
+	 * Count and return the number of valuable in the purse.
+	 * This is the number of money, not their value.
+	 * @return the number of valuable in the purse
 	 */
 	public int count() { return money.size(); }
 
@@ -57,7 +57,7 @@ public class Purse {
 
 
 	/**
-	 * Return the capacity of the coin purse.
+	 * Return the capacity of the valuable purse.
 	 * @return the capacity
 	 */
 
@@ -80,18 +80,18 @@ public class Purse {
 	}
 
 	/** 
-	 * Insert a coin into the purse.
-	 * The coin is only inserted if the purse has space for it
-	 * and the coin has positive value.  No worthless coins!
-	 * @param coin is a Coin object to insert into purse
-	 * @return true if coin inserted, false if can't insert
+	 * Insert a valuable into the purse.
+	 * The valuable is only inserted if the purse has space for it
+	 * and the valuable has positive value.  No worthless money!
+	 * @param valuable is a Coin object to insert into purse
+	 * @return true if valuable inserted, false if can't insert
 	 */
-	 public boolean insert( Valuable coin ) {
+	 public boolean insert( Valuable valuable ) {
 		if (!isFull()) {
-			if (coin.getValue() <= 0) {
+			if (valuable.getValue() <= 0) {
 				return false;
 			} else {
-				money.add(coin);
+				money.add(valuable);
 				return true;
 			}
 		}
@@ -101,10 +101,10 @@ public class Purse {
 
 	/**  
 	 *  Withdraw the requested amount of money.
-	 *  Return an array of Coins withdrawn from purse,
+	 *  Return an array of money withdrawn from purse,
 	 *  or return null if cannot withdraw the amount requested.
 	 *  @param amount is the amount to withdraw
-	 *  @return array of Coin objects for money withdrawn, 
+	 *  @return array of valuable objects for money withdrawn, 
 	 *    or null if cannot withdraw requested amount.
 	 */
 	public Valuable[] withdraw( double amount ) {
@@ -155,7 +155,7 @@ public class Purse {
 	 * It can return whatever is a useful description.
 	 */
 	public String toString() {
-		return "purse have " + this.count() + " coin with balance " + this.getBalance();
+		return "purse have " + this.count() + " valuable with balance " + this.getBalance();
 	}
 
 }
