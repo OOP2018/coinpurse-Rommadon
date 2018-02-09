@@ -1,10 +1,18 @@
 package coinpurse;
-
+/**
+ *  
+ *  Money represents value and currency.
+ *  @author Rommadon Teedo 5810545025
+ */
 public class Money implements  Valuable  {
 
 	protected double value;
 	protected String currency;
-
+	  /**
+		 * Constructor for money with a value and currency
+		 * @param value of the money
+		 * @param currency of the money
+		 */
 	public Money(double value,String currency){
 		this.value=value;
 		this.currency=currency;

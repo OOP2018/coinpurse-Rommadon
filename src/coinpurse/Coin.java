@@ -16,22 +16,8 @@ public class Coin extends Money {
 		
     }
 
-	//    /**
-//	 * Compare the value of coins.
-//	 * @param coin
-//	 */
-//   
-//    public int compareTo(Coin coin) { 
-//    	if(this.getValue()-coin.getValue() <0)
-//		{
-//			return -1;
-//		} else if(this.getValue()-coin.getValue() > 0){
-//			return 1;
-//		} else { 
-//			return 0;
-//		}
-//		
-//	}
+
+
     /**
 	 * show value and currency
 	 * @return the sentence value and currency.

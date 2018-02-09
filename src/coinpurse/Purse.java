@@ -110,6 +110,8 @@ public class Purse {
 	public Valuable[] withdraw( double amount ) {
 
 		double amountNeededToWithdraw = amount;
+		
+		
 
 		if(amount<=0) {
 			return null;
@@ -119,21 +121,23 @@ public class Purse {
     	List<Valuable> list = new ArrayList<>();
     	Collections.sort(money, comp);
     	Collections.reverse(money);
+    	
+    	
 
 		if(amountNeededToWithdraw!=0) {	
 			if(amountNeededToWithdraw <= this.getBalance())
 			{
 				for (int i = 0; i < money.size(); i++)
 				{
-//					if(money.get(i).getCurrency().equalsIgnoreCase("Baht")) { 
-//						
+					
+						
 					
 						if(amountNeededToWithdraw >= money.get(i).getValue())
 						{
 						amountNeededToWithdraw -= money.get(i).getValue();
 						list.add(money.get(i));					
-						}
-//					}
+						
+					}
 				}
 			}
 
@@ -166,6 +170,8 @@ public class Purse {
 	public Valuable[] withdraw( Valuable amount ) {
 
 		double amountNeededToWithdraw = amount.getValue();
+		
+	
 		
 		if(amount.getValue()<=0) {
 			return null;
