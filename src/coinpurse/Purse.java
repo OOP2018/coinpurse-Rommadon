@@ -16,7 +16,7 @@ import java.util.Comparator;
  */
 public class Purse {
 	/** Collection of objects in the purse. */
-	private List<Valuable> money;
+	private List<Valuable> money= new ArrayList<Valuable>();;
 
 
 	/** Capacity is maximum number of items the purse can hold.
@@ -30,7 +30,7 @@ public class Purse {
 	 */
 	public Purse( int capacity ) {
 		this.capacity=capacity;
-    	money = new ArrayList<Valuable>();
+    	
 
 
 	}
@@ -125,11 +125,69 @@ public class Purse {
 			{
 				for (int i = 0; i < money.size(); i++)
 				{
-					if(amountNeededToWithdraw >= money.get(i).getValue())
-					{
+//					if(money.get(i).getCurrency().equalsIgnoreCase("Baht")) { 
+//						
+					
+						if(amountNeededToWithdraw >= money.get(i).getValue())
+						{
 						amountNeededToWithdraw -= money.get(i).getValue();
 						list.add(money.get(i));					
 						}
+//					}
+				}
+			}
+
+			if(amountNeededToWithdraw==0)
+			{
+				for(Valuable removeCoin : list)
+				{
+					money.remove(removeCoin);
+				}
+			} else {	
+				return null;
+			}
+
+			Valuable[] withdraw = new Valuable[list.size()];
+
+	        return list.toArray(withdraw);
+		}
+		return null;
+	}
+	
+	/**  
+	 *  Withdraw the requested amount of money and currency.
+	 *  Return an array of money withdrawn from purse,
+	 *  or return null if cannot withdraw the amount requested.
+	 *  @param amount is the amount to withdraw and currency
+	 *  @return array of valuable objects for money withdrawn, 
+	 *    or null if cannot withdraw requested amount.
+	 */
+	
+	public Valuable[] withdraw( Valuable amount ) {
+
+		double amountNeededToWithdraw = amount.getValue();
+		
+		if(amount.getValue()<=0) {
+			return null;
+		}
+
+		Comparator<Valuable> comp = new ValueComparator();
+    	List<Valuable> list = new ArrayList<>();
+    	Collections.sort(money, comp);
+    	Collections.reverse(money);
+
+		if(amountNeededToWithdraw!=0) {	
+			if(amountNeededToWithdraw <= this.getBalance())
+			{
+				for (int i = 0; i < money.size(); i++)
+				{
+					if(amount.getCurrency().equals(money.get(i).getCurrency())) { 
+						if(amountNeededToWithdraw>= money.get(i).getValue())
+						{
+						amountNeededToWithdraw -= money.get(i).getValue();
+						list.add(money.get(i));					
+						}
+					}
 				}
 			}
 

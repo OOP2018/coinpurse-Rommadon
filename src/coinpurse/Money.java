@@ -6,23 +6,24 @@ public class Money implements  Valuable  {
 	protected String currency;
 
 	public Money(double value,String currency){
-		super();
+		this.value=value;
+		this.currency=currency;
 	}
 	/**
-	 * Return the value of coin
-	 * @return value of coin
+	 * Return the value of money
+	 * @return value of money
 	 */
 	public double getValue() { return value; }
 
 	/**
-	 * Return the currency of coin
-	 * @return currency of coin
+	 * Return the currency of money
+	 * @return currency of money
 	 */
 	public String getCurrency() { return currency; }
 	
 	   /**
-		 * Compare the value of coins.
-		 * @param coin
+		 * Compare the value of money.
+		 * @param Valuable o is object valuable
 		 */
 	   
 	public int compareTo(Valuable o) { 
@@ -44,7 +45,7 @@ public class Money implements  Valuable  {
 			
 		}
 	/**
-	 * Two coin are equal if they have same value and currency.
+	 * Two money are equal if they have same value and currency.
 	 */
 	public boolean equals(Object arg) {
 		if (arg == null) return false;
