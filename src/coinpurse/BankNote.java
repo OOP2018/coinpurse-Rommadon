@@ -14,12 +14,14 @@ public class BankNote extends Money {
 	/**
 	 * Constructor for banknote with a value and currency
 	 * 
-	 * @param value of the banknote
-	 * @param currency of the banknote
+	 * @param value
+	 *            of the banknote
+	 * @param currency
+	 *            of the banknote
 	 * 
 	 */
 	public BankNote(double value, String currency) {
-		super(value,currency);
+		super(value, currency);
 		this.serialNumber = nextSerialNumber++;
 	}
 
@@ -31,7 +33,6 @@ public class BankNote extends Money {
 	public long getSerial() {
 		return serialNumber;
 	}
-
 
 	/**
 	 * Returns a description of the banknote.
