@@ -32,20 +32,20 @@ public class BankNote extends Money {
 		return serialNumber;
 	}
 	
-	/**
-	 * Checks object equal or not.
-	 * @param arg is the object compare 
-	 * @return true if equal false otherwise
-	 */
-
-	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj.getClass() != this.getClass())
-			return false;
-		BankNote other = (BankNote) obj;
-		return this.value == other.value && this.currency.equals(other.currency);
-	}
+//	/**
+//	 * Checks object equal or not.
+//	 * @param arg is the object compare 
+//	 * @return true if equal false otherwise
+//	 */
+//
+//	public boolean equals(Object obj) {
+//		if (obj == null)
+//			return false;
+//		if (obj.getClass() != this.getClass())
+//			return false;
+//		BankNote other = (BankNote) obj;
+//		return this.value == other.value && this.currency.equals(other.currency);
+//	}
 
 	/**
 	 * Returns a description of the banknote.

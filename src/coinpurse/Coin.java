@@ -16,20 +16,7 @@ public class Coin extends Money {
 		
     }
 
-	/**
-	 * Two coin are equal if they have same value and currency.
-	 */
-    public boolean equals(Object arg) {
-    	if (arg == null) return false;
-		if (arg.getClass() != this.getClass() )
-			return false;
-		Coin other = (Coin) arg;
-		if ( currency.equalsIgnoreCase( other.currency ) && value==other.value )
-			return true;
-		return false; 
-	}
-
-//    /**
+	//    /**
 //	 * Compare the value of coins.
 //	 * @param coin
 //	 */
@@ -51,7 +38,7 @@ public class Coin extends Money {
 	 */
     public String toString() {
        
-    	return value + " " + currency;
+    	return getValue() + " " + getCurrency();
     }
 
 }

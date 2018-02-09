@@ -26,15 +26,34 @@ public class Money implements  Valuable  {
 		 */
 	   
 	public int compareTo(Valuable o) { 
-	    	if(this.getValue()-o.getValue() <0)
+	    	if(this.getCurrency().charAt(0) < o.getCurrency().charAt(0))
 			{
 				return -1;
-			} else if(this.getValue()-o.getValue() > 0){
+			} else if(this.getCurrency().charAt(0) > o.getCurrency().charAt(0)){
 				return 1;
 			} else { 
-				return 0;
+				if(this.getValue()-o.getValue() <0)
+					{
+						return -1;
+					} else if(this.getValue()-o.getValue() > 0){
+						return 1;
+					} else { 
+						return 0;
+					}
 			}
 			
 		}
+	/**
+	 * Two coin are equal if they have same value and currency.
+	 */
+	public boolean equals(Object arg) {
+		if (arg == null) return false;
+		if (arg.getClass() != this.getClass() )
+			return false;
+		Money other = (Money) arg;
+		if ( currency.equalsIgnoreCase( other.currency ) && value==other.value )
+			return true;
+		return false; 
+	}
 
 }
