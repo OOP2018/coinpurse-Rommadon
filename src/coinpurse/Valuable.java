@@ -5,7 +5,7 @@ package coinpurse;
  * 
  * @author Rommadon Teedo 5810545025
  */
-public interface Valuable {
+public interface Valuable extends Comparable<Valuable>  {
 	/**
 	 * Get the value
 	 * 
