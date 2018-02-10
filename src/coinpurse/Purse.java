@@ -134,9 +134,11 @@ public class Purse {
 
 		List<Valuable> list = new ArrayList<Valuable>();
 		Comparator<Valuable> comp = new ValueComparator();
+		double amountNeededToWithdraw = amount.getValue();
+		List<Valuable> List2 = new ArrayList<Valuable>();
 		list.addAll(money);
-		
-		if (amount.getValue() <= 0 || amount == null ) {
+
+		if (amount.getValue() <= 0 || amount == null) {
 			return null;
 		}
 		// check currency
@@ -145,32 +147,29 @@ public class Purse {
 				list.remove(valuable);
 			}
 		}
-		
+		// sort new list that have same currency
 		Collections.sort(money, comp);
 		Collections.reverse(money);
-
-		double amountNeededToWithdraw = amount.getValue();
-		List<Valuable> newList = new ArrayList<Valuable>();
 
 		for (Valuable v : list) {
 			if (amountNeededToWithdraw >= v.getValue()) {
 				amountNeededToWithdraw -= v.getValue();
-				newList.add(v);
+				List2.add(v);
 			}
-			if (amountNeededToWithdraw == 0){
+			if (amountNeededToWithdraw == 0) {
 				break;
 			}
 		}
 
-		if (amountNeededToWithdraw != 0 || newList.isEmpty()){
+		if (amountNeededToWithdraw != 0 ) {
 			return null;
 		}
-		for (Valuable v2 : newList){
+		for (Valuable v2 : List2) {
 			money.remove(v2);
 		}
-		
-		Valuable[] withdrawCoin = new Valuable[newList.size()];
-		return newList.toArray(withdrawCoin);
+
+		Valuable[] withdrawCoin = new Valuable[List2.size()];
+		return List2.toArray(withdrawCoin);
 	}
 
 	/**
