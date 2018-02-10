@@ -113,42 +113,9 @@ public class Purse {
 	 */
 	public Valuable[] withdraw(double amount) {
 
-		double amountNeededToWithdraw = amount;
+		Valuable valuable = new Money(amount, "Baht");
+		return withdraw(valuable);
 
-		if (amount <= 0) {
-			return null;
-		}
-
-		Comparator<Valuable> comp = new ValueComparator();
-		List<Valuable> list = new ArrayList<>();
-		Collections.sort(money, comp);
-		Collections.reverse(money);
-
-		if (amountNeededToWithdraw != 0) {
-			if (amountNeededToWithdraw <= this.getBalance()) {
-				for (int i = 0; i < money.size(); i++) {
-
-					if (amountNeededToWithdraw >= money.get(i).getValue()) {
-						amountNeededToWithdraw -= money.get(i).getValue();
-						list.add(money.get(i));
-
-					}
-				}
-			}
-
-			if (amountNeededToWithdraw == 0) {
-				for (Valuable removeCoin : list) {
-					money.remove(removeCoin);
-				}
-			} else {
-				return null;
-			}
-
-			Valuable[] withdraw = new Valuable[list.size()];
-
-			return list.toArray(withdraw);
-		}
-		return null;
 	}
 
 	/**
@@ -165,41 +132,45 @@ public class Purse {
 	public Valuable[] withdraw(Valuable amount) {
 
 		double amountNeededToWithdraw = amount.getValue();
-
-		if (amount.getValue() <= 0) {
-			return null;
-		}
-
+		double sumAmount = amount.getValue();
+		List<Valuable> list = new ArrayList<Valuable>();
 		Comparator<Valuable> comp = new ValueComparator();
-		List<Valuable> list = new ArrayList<>();
-		Collections.sort(money, comp);
-		Collections.reverse(money);
+		List<Valuable> filterMoney = MoneyUtil.filterByCurrency(money, amount.getCurrency());
+		money.removeAll(filterMoney);
+		Collections.sort(filterMoney, comp);
 
-		if (amountNeededToWithdraw != 0) {
-			if (amountNeededToWithdraw <= this.getBalance()) {
-				for (int i = 0; i < money.size(); i++) {
-					if (amount.getCurrency().equals(money.get(i).getCurrency())) {
-						if (amountNeededToWithdraw >= money.get(i).getValue()) {
-							amountNeededToWithdraw -= money.get(i).getValue();
-							list.add(money.get(i));
-						}
+		for (int i = 0; i < filterMoney.size(); i++) {
+			amountNeededToWithdraw = sumAmount - filterMoney.get(i).getValue();
+			if (amountNeededToWithdraw >= 0) {
+				double sum = 0;
+				list.add(filterMoney.get(i));
+				filterMoney.remove(i);
+				if (!list.isEmpty()) {
+
+					for (Valuable c : list) {
+						sum += c.getValue();
 					}
+
+					sumAmount = amount.getValue() - sum;
 				}
 			}
-
-			if (amountNeededToWithdraw == 0) {
-				for (Valuable removeCoin : list) {
-					money.remove(removeCoin);
-				}
-			} else {
-				return null;
+			if (amountNeededToWithdraw == 0 || filterMoney.isEmpty()) {
+				break;
 			}
-
-			Valuable[] withdraw = new Valuable[list.size()];
-
-			return list.toArray(withdraw);
 		}
-		return null;
+		if (amountNeededToWithdraw > 0) {
+			filterMoney.addAll(list);
+			money.addAll(filterMoney);
+			return null;
+		} else if (amountNeededToWithdraw < 0) {
+			filterMoney.addAll(list);
+			money.addAll(filterMoney);
+			return null;
+		} else {
+			money.addAll(filterMoney);
+			return list.toArray(new Valuable[list.size()]);
+		}
+
 	}
 
 	/**
