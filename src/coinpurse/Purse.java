@@ -13,7 +13,7 @@ import java.util.Comparator;
  */
 public class Purse {
 	/** Collection of objects in the purse. */
-	private List<Valuable> money = new ArrayList<Valuable>();;
+	private List<Valuable> money;
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set
@@ -29,6 +29,7 @@ public class Purse {
 	 */
 	public Purse(int capacity) {
 		this.capacity = capacity;
+		money = new ArrayList<Valuable>();
 	}
 
 	/**
@@ -131,46 +132,45 @@ public class Purse {
 
 	public Valuable[] withdraw(Valuable amount) {
 
-		double amountNeededToWithdraw = amount.getValue();
-		double sumAmount = amount.getValue();
 		List<Valuable> list = new ArrayList<Valuable>();
 		Comparator<Valuable> comp = new ValueComparator();
-		List<Valuable> filterMoney = MoneyUtil.filterByCurrency(money, amount.getCurrency());
-		money.removeAll(filterMoney);
-		Collections.sort(filterMoney, comp);
-
-		for (int i = 0; i < filterMoney.size(); i++) {
-			amountNeededToWithdraw = sumAmount - filterMoney.get(i).getValue();
-			if (amountNeededToWithdraw >= 0) {
-				double sum = 0;
-				list.add(filterMoney.get(i));
-				filterMoney.remove(i);
-				if (!list.isEmpty()) {
-
-					for (Valuable c : list) {
-						sum += c.getValue();
-					}
-
-					sumAmount = amount.getValue() - sum;
-				}
+		list.addAll(money);
+		
+		if (amount.getValue() <= 0 || amount == null ) {
+			return null;
+		}
+		// check currency
+		for (Valuable valuable : new ArrayList<>(list)) {
+			if (!amount.getCurrency().equalsIgnoreCase(valuable.getCurrency())) {
+				list.remove(valuable);
 			}
-			if (amountNeededToWithdraw == 0 || filterMoney.isEmpty()) {
+		}
+		
+		Collections.sort(money, comp);
+		Collections.reverse(money);
+
+		double amountNeededToWithdraw = amount.getValue();
+		List<Valuable> newList = new ArrayList<Valuable>();
+
+		for (Valuable v : list) {
+			if (amountNeededToWithdraw >= v.getValue()) {
+				amountNeededToWithdraw -= v.getValue();
+				newList.add(v);
+			}
+			if (amountNeededToWithdraw == 0){
 				break;
 			}
 		}
-		if (amountNeededToWithdraw > 0) {
-			filterMoney.addAll(list);
-			money.addAll(filterMoney);
-			return null;
-		} else if (amountNeededToWithdraw < 0) {
-			filterMoney.addAll(list);
-			money.addAll(filterMoney);
-			return null;
-		} else {
-			money.addAll(filterMoney);
-			return list.toArray(new Valuable[list.size()]);
-		}
 
+		if (amountNeededToWithdraw != 0 || newList.isEmpty()){
+			return null;
+		}
+		for (Valuable v2 : newList){
+			money.remove(v2);
+		}
+		
+		Valuable[] withdrawCoin = new Valuable[newList.size()];
+		return newList.toArray(withdrawCoin);
 	}
 
 	/**
