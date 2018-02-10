@@ -12,7 +12,7 @@ public class BankNote extends Money {
 	private static long nextSerialNumber = 1000000;
 
 	/**
-	 * Constructor for banknote with a value and currency
+	 * Constructor for banknote with a value and currency 
 	 * 
 	 * @param value
 	 *            of the banknote

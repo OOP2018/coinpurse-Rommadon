@@ -112,8 +112,7 @@ public class Purse {
 	 */
 	public Valuable[] withdraw(double amount) {
 
-		Valuable valuable = new Money(amount, "Baht");
-		return withdraw(valuable);
+		return withdraw(new Money(amount, "Baht"));
 
 	}
 
@@ -135,25 +134,26 @@ public class Purse {
 		double amountNeededToWithdraw = amount.getValue();
 		List<Valuable> List2 = new ArrayList<Valuable>();
 		list.addAll(money);
+		Collections.sort(money, comp);
+		Collections.reverse(money);
 
 		if (amount.getValue() <= 0 || amount == null) {
 			return null;
 		}
+
 		// check currency
-		for (Valuable valuable : new ArrayList<>(list)) {
-			if (!amount.getCurrency().equalsIgnoreCase(valuable.getCurrency())) {
-				list.remove(valuable);
+		for (Valuable valuableToCheckCurrency : new ArrayList<>(list)) {
+			if (!amount.getCurrency().equalsIgnoreCase(valuableToCheckCurrency.getCurrency())) {
+				list.remove(valuableToCheckCurrency);
 			}
 		}
-		
-		Collections.sort(money, comp);
-		Collections.reverse(money);
 
-		for (Valuable v : list) {
-			if (amountNeededToWithdraw >= v.getValue()) {
-				amountNeededToWithdraw -= v.getValue();
-				List2.add(v);
+		for (Valuable valuableToAddList2 : list) {
+			if (amountNeededToWithdraw >= valuableToAddList2.getValue()) {
+				amountNeededToWithdraw -= valuableToAddList2.getValue();
+				List2.add(valuableToAddList2);
 			}
+
 			if (amountNeededToWithdraw == 0) {
 				break;
 			}
@@ -163,8 +163,8 @@ public class Purse {
 			return null;
 		}
 		// remove money
-		for (Valuable v2 : List2) {
-			money.remove(v2);
+		for (Valuable valuableToRemove : List2) {
+			money.remove(valuableToRemove);
 		}
 
 		Valuable[] withdrawCoin = new Valuable[List2.size()];
