@@ -30,7 +30,7 @@ public class Money implements  Valuable  {
 	public String getCurrency() { return currency; }
 	
 	   /**
-		 * Compare the value of money.
+		 * Compare the  money with currency and value.
 		 * @param Valuable o is object valuable
 		 */
 	   

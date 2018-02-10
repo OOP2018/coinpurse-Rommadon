@@ -103,14 +103,12 @@ public class Purse {
 	}
 
 	/**
-	 * Withdraw the requested amount of money. Return an array of money
-	 * withdrawn from purse, or return null if cannot withdraw the amount
-	 * requested.
+	 * Withdraw the requested amount of money. set your currency and sent to
+	 * Valuable[] withdraw(Valuable amount)
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
-	 * @return array of valuable objects for money withdrawn, or null if cannot
-	 *         withdraw requested amount.
+	 * @return method withdraw();
 	 */
 	public Valuable[] withdraw(double amount) {
 
@@ -120,8 +118,8 @@ public class Purse {
 	}
 
 	/**
-	 * Withdraw the requested amount of money and currency. Return an array of
-	 * money withdrawn from purse, or return null if cannot withdraw the amount
+	 * Withdraw the requested object of money . Return an array of money
+	 * withdrawn from purse, or return null if cannot withdraw the amount
 	 * requested.
 	 * 
 	 * @param amount
@@ -147,7 +145,7 @@ public class Purse {
 				list.remove(valuable);
 			}
 		}
-		// sort new list that have same currency
+		
 		Collections.sort(money, comp);
 		Collections.reverse(money);
 
@@ -161,9 +159,10 @@ public class Purse {
 			}
 		}
 
-		if (amountNeededToWithdraw != 0 ) {
+		if (amountNeededToWithdraw != 0) {
 			return null;
 		}
+		// remove money
 		for (Valuable v2 : List2) {
 			money.remove(v2);
 		}
